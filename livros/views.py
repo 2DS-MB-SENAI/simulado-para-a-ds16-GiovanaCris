@@ -26,7 +26,7 @@ def methods_livros(request):
         paginas = request.query_params.get('paginas')
 
         serializer = LivroSerializer(livros, many=True)
-        return Response(serializer.data, status=request.data, many=isinstance(request.data, list))
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     if request.method == 'POST':
         serializer = LivroSerializer(data=request.data, many=isinstance(request.data, list))
