@@ -1,18 +1,18 @@
 from django.shortcuts import render
-from .models import Livros
+from .models import Livro
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 from .serializers import LivroSerializer
 
 def listar_livros(request):
-    livros = Livros.objects.all()
+    livros = Livro.objects.all()
     return render (request, 'livros.html', {'livros':livros})
 
 @api_view(['GET', 'POST'])
 def methods_livros(request):
     if request.method == 'GET':
-        livros = Livros.objects.all()
+        livros = Livro.objects.all()
         titulo = request.query_params.get('titulo')
         autor = request.query_params.get('autor')
         paginas = request.query_params.get('paginas')
