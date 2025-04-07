@@ -12,13 +12,22 @@ def listar_livros(request):
 @api_view(['GET', 'POST'])
 def methods_livros(request):
     if request.method == 'GET':
+    # Colocar o patch no api view
+    #     usuario = request.user
+    #     serializer = UsuarioSerializer(usuario)
+    #     return Response(serializer.data)
+    
+    # if request.method in ['PUT', 'PATCH']:
+    #     parcial = request.method == patch
+
         livros = Livro.objects.all()
         titulo = request.query_params.get('titulo')
         autor = request.query_params.get('autor')
         paginas = request.query_params.get('paginas')
 
         serializer = LivroSerializer(livros, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=request.data, many=isinstance(request.data, list))
+
     if request.method == 'POST':
         serializer = LivroSerializer(data=request.data, many=isinstance(request.data, list))
         if serializer.is_valid():
