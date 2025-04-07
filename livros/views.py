@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from .models import Livro
+from .serializers import LivroSerializer
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from rest_framework.response import Response
-from .serializers import LivroSerializer
 
 def listar_livros(request):
     livros = Livro.objects.all()
