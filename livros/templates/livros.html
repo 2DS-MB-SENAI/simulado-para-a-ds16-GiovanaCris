@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de livros</title>
+</head>
+<body>
+    <h2>Livros listados</h2> <!--A variável livros do for é feita no views.py então ela é pega de lá para fazer o for-->
+    <!--O titulo e autor é pego do module.py-->
+    {% for i in  livros%}
+        <li>
+            {{i.titulo}} - {{i.autor}} 
+        </li>
+    {% endfor %}
+</body>
+</html>
