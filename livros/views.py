@@ -20,13 +20,12 @@ def methods_livros(request):
     # if request.method in ['PUT', 'PATCH']:
     #     parcial = request.method == patch
 
-        livros = Livro.objects.all()
-        titulo = request.query_params.get('titulo')
-        autor = request.query_params.get('autor')
-        paginas = request.query_params.get('paginas')
-
-        serializer = LivroSerializer(livros, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            livros = Livro.objects.all()
+            serializer = LivroSerializer(livros, many=True)
+            
+        except Livro.DoesNotExist:
+            return Response({'erro': 'Evento não agendado'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'POST':
         serializer = LivroSerializer(data=request.data, many=isinstance(request.data, list))
